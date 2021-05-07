@@ -1,5 +1,6 @@
 ﻿using Models;
 using Repository.Contracts;
+using System;
 using System.Collections.Generic;
 
 namespace Controllers
@@ -16,5 +17,8 @@ namespace Controllers
 
         public List<Location> GetLocations() => LocationRepository.GetLocations();
 
+        public Location GetLocationById(int id) => LocationRepository.GetLocationById(id);
+
+        public void UpdateLocation(Location location) => LocationRepository.UpdateLocation(location);
     }
 }

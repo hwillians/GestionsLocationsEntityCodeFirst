@@ -15,7 +15,7 @@ namespace Models
         [Required]
         public DateTime DateDebut { get; set; }
    
-        public DateTime DateFin { get; set; }
+        public DateTime? DateFin { get; set; }
 
         public virtual Client Client { get; set; }
         public virtual Vehicule Vehicule { get; set; }
@@ -23,7 +23,7 @@ namespace Models
         public override string ToString()
         {
             return string.Format("{0} - Id client : {1}, Id vehicule : {2}, {3}Km  du {4} au {5}",
-                Id, ClientID, VehiculeID, NbKm, DateDebut.ToString("dd/MM/yyyy"), DateFin.ToString("dd/MM/yyyy"));
+                Id, ClientID, VehiculeID, NbKm, DateDebut.ToString("dd/MM/yyyy"), DateFin?.ToString("dd/MM/yyyy"));
         }
     }
 }

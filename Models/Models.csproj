@@ -75,6 +75,10 @@
     <Compile Include="Migrations\202105071257332_atribut-unique.Designer.cs">
       <DependentUpon>202105071257332_atribut-unique.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202105071516320_datefin-null.cs" />
+    <Compile Include="Migrations\202105071516320_datefin-null.Designer.cs">
+      <DependentUpon>202105071516320_datefin-null.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Vehicule.cs" />
@@ -98,6 +102,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202105071257332_atribut-unique.resx">
       <DependentUpon>202105071257332_atribut-unique.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202105071516320_datefin-null.resx">
+      <DependentUpon>202105071516320_datefin-null.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

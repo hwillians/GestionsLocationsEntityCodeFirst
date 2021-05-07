@@ -7,5 +7,8 @@ namespace Repository.Contracts
     {
         Location CreateLocation(Location location);
         List<Location> GetLocations();
+        Location GetLocationById(int id);
+        void UpdateLocation(Location location);
+        void DeleteLocation(Location location);
     }
 }

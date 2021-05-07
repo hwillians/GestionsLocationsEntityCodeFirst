@@ -27,6 +27,8 @@ namespace View
                 "\n8.- Modifier un Véhicule" +
                 "\n9.- Ajouter une Location" +
                 "\n10.- Afficher la liste des Locations" +
+                "\n11.- Afficher une location" +
+                "\n12.- Modifier une location" +
 
                 "\n0.- Sortir\n");
 
@@ -52,11 +54,68 @@ namespace View
 
                     case 10: Write(string.Join("\n", locationController.GetLocations())); break;
 
+                    case 11: OptionGetLocationById(locationController); break;
+
+                    case 12: OptionUdpateLocation(locationController); break;
+
                     case 0: WriteLine("à bientôt..."); break;
 
                     default: WriteLine("Action non reconnue..."); break;
                 }
             }
+        }
+
+        private static void OptionUdpateLocation(LocationController locationController)
+        {
+            int id = GetIntConsole("Tapez l'id du véhicule : ");
+            var location = locationController.GetLocationById(id);
+
+            if (location == null) WriteLine("L'id n'existe pas en base");
+            else
+            {
+                String propModif = "";
+
+                while (propModif != "i" && propModif != "mod" && propModif != "cou" && propModif != "mar" && propModif
+                    != "czt" && propModif != "all")
+                {
+                    propModif = GetStringConsole("Choisissez l'élement à modifier " +
+                      "\ni : Immatriculation, mod : Modele, cou : Couleur, mar : Marque, cat : Categorie, " +
+                      "all : toute les éléments ");
+                }
+
+                switch (propModif)
+                {
+                    case "n": location.ClientID = GetIntConsole(location.ClientID + " : "); break;
+                    case "p": location.VehiculeID = GetIntConsole(location.VehiculeID + " : "); break;
+                    case "d": location.NbKm = GetIntConsole(location.NbKm + " : "); break;
+                    case "a": location.DateDebut = GetDateConsole(location.DateDebut + " : "); break;
+                    case "c": location.DateFin = GetDateConsole(location.DateFin + " : "); break;
+
+                    case "all":
+                        WriteLine(location);
+                        location = new Location()
+                        {
+                            Id = location.Id,
+                            ClientID = GetIntConsole("Id client : "),
+                            VehiculeID = GetIntConsole("Id vehicule : "),
+                            NbKm = GetIntConsole("Nombre de Kilometres : "),
+                            DateDebut = GetDateConsole("Date de début : "),
+                            DateFin = GetDateConsole("Date de fin : ")
+                        }; break;
+                    default: break;
+                }
+                locationController.UpdateLocation(location);
+                WriteLine(locationController.GetLocationById(id));
+            }
+        }
+
+        private static void OptionGetLocationById(LocationController locationController)
+        {
+            int id = GetIntConsole("Tapez l'id de la Location : ");
+            var location = locationController.GetLocationById(id);
+
+            if (location == null) WriteLine("L'id n'existe pas en base");
+            else WriteLine(location);
         }
 
         private static void OptionUdpateVehicule(VehiculeController vehiculeController)
@@ -134,9 +193,7 @@ namespace View
                 VehiculeID = GetIntConsole("Id vehicule : "),
                 NbKm = GetIntConsole("NbKm"),
                 DateDebut = GetDateConsole("Date debut : "),
-                DateFin = GetDateConsole("Date fin : ")
             };
-
             WriteLine(locationController.CreateLocation(location));
         }
 
