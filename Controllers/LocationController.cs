@@ -6,15 +6,15 @@ namespace Controllers
 {
     public class LocationController
     {
-        private ILocationRepository LocationRepo { get; }
+        private ILocationRepository LocationRepository { get; }
         public LocationController(ILocationRepository locationRepo)
         {
-            LocationRepo = locationRepo;
+            LocationRepository = locationRepo;
         }
 
-        public Location CreateLocation(Location location) => LocationRepo.CreateLocation(location);
+        public Location CreateLocation(Location location) => LocationRepository.CreateLocation(location);
 
-        public List<Location> GetListLocations() => LocationRepo.GetListLocations();
+        public List<Location> GetLocations() => LocationRepository.GetLocations();
 
     }
 }

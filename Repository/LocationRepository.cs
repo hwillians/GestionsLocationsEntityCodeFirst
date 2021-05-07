@@ -14,7 +14,7 @@ namespace Repository
             return location;
         }
 
-        public List<Location> GetListLocations()
+        public List<Location> GetLocations()
         {
             var locations = new List<Location>(context.Locations);
 

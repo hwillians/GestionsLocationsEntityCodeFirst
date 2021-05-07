@@ -8,7 +8,7 @@ namespace View
 {
     public static class Menu
     {
-        public static void Deployer(ClientController clientController, LocationController locationController)
+        public static void Deployer(ClientController clientController, LocationController locationController, VehiculeController vehiculeController)
         {
             int choix = -1;
 
@@ -21,8 +21,10 @@ namespace View
                 "\n2.- Afficher la liste des Clients" +
                 "\n3.- Afficher un Client" +
                 "\n4.- Modifier un Client" +
-                "\n5.- Ajouter une Location" +
-                "\n6.- Afficher la liste des Locations" +
+                "\n5.- Afficher les Vehicules" +
+                "\n6.- Ajouter une Location" +
+                "\n7.- Afficher la liste des Locations" +
+
                 "\n0.- Sortir\n");
 
                 switch (choix)
@@ -35,9 +37,11 @@ namespace View
 
                     case 4: OptionUdpateClient(clientController); break;
 
-                    case 5: OptionCreateLocation(locationController); break;
+                    case 5: Write(string.Join("\n", vehiculeController.GetVehicules())); break;
 
-                    case 6: Write(string.Join("\n", locationController.GetListLocations())); break;
+                    case 6: OptionCreateLocation(locationController); break;
+
+                    case 7: Write(string.Join("\n", locationController.GetLocations())); break;
 
                     case 0: WriteLine("à bientôt..."); break;
 

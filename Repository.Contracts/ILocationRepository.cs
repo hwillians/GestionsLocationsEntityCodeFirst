@@ -6,6 +6,6 @@ namespace Repository.Contracts
     public interface ILocationRepository
     {
         Location CreateLocation(Location location);
-        List<Location> GetListLocations();
+        List<Location> GetLocations();
     }
 }

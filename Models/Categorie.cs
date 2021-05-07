@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Models
 {
@@ -7,6 +8,7 @@ namespace Models
         public int Id { get; set; }
         [Required]
         [MaxLength(100)]
+        [Index(IsUnique = true)]
         public string Libelle { get; set; }
         [Required]
         public int PrixKm { get; set; }

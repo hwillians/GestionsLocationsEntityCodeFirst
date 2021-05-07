@@ -14,13 +14,14 @@ namespace view
 
             unityContainer.RegisterType<ClientController, ClientController>();
             unityContainer.RegisterType<LocationController, LocationController>();
+            unityContainer.RegisterType<VehiculeController, VehiculeController>();
             unityContainer.RegisterType<IClientRepository, ClientRepository>();
             unityContainer.RegisterType<ILocationRepository, LocationRepository>();
+            unityContainer.RegisterType<IVehiculeRepository, VehiculeRepository>();
 
-            var clientController = unityContainer.Resolve<ClientController>();
-            var locationController = unityContainer.Resolve<LocationController>();
-
-            Menu.Deployer(clientController, locationController);
+            Menu.Deployer(unityContainer.Resolve<ClientController>(),
+                unityContainer.Resolve<LocationController>(),
+                unityContainer.Resolve<VehiculeController>());
         }
     }
 }
