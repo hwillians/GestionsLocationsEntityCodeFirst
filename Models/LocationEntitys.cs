@@ -1,6 +1,4 @@
-﻿using System;
-using System.Data.Entity;
-using System.Linq;
+﻿using System.Data.Entity;
 
 namespace Models
 {
@@ -21,6 +19,10 @@ namespace Models
         // sur la configuration et l'utilisation du modèle Code First, consultez http://go.microsoft.com/fwlink/?LinkId=390109.
 
          public virtual DbSet<Client> Clients { get; set; }
+         public virtual DbSet<Categorie> Categories { get; set; }
+         public virtual DbSet<Marque> Marques { get; set; }
+         public virtual DbSet<Vehicule> Vehicules { get; set; }
+         public virtual DbSet<Location> Locations { get; set; }
     }
 
     //public class MyEntity
