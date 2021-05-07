@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Models
 {
@@ -19,6 +20,7 @@ namespace Models
 
         public virtual Marque Marque { get; set; }
         public virtual Categorie Categorie { get; set; }
+        public virtual List<Location> Locations { get; set; }
 
         public override string ToString()
         {

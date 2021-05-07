@@ -21,9 +21,12 @@ namespace View
                 "\n2.- Afficher la liste des Clients" +
                 "\n3.- Afficher un Client" +
                 "\n4.- Modifier un Client" +
-                "\n5.- Afficher les Vehicules" +
-                "\n6.- Ajouter une Location" +
-                "\n7.- Afficher la liste des Locations" +
+                "\n5.- Ajouter un Véhicule" +
+                "\n6.- Afficher la liste des Véhicules" +
+                "\n7.- Afficher un Véhicule" +
+                "\n8.- Modifier un Véhicule" +
+                "\n9.- Ajouter une Location" +
+                "\n10.- Afficher la liste des Locations" +
 
                 "\n0.- Sortir\n");
 
@@ -37,11 +40,17 @@ namespace View
 
                     case 4: OptionUdpateClient(clientController); break;
 
-                    case 5: Write(string.Join("\n", vehiculeController.GetVehicules())); break;
+                    case 5: OptionAddVehicule(vehiculeController); break;
 
-                    case 6: OptionCreateLocation(locationController); break;
+                    case 6: Write(string.Join("\n", vehiculeController.GetVehicules())); break;
 
-                    case 7: Write(string.Join("\n", locationController.GetLocations())); break;
+                    case 7: OptionGetVehiculeById(vehiculeController); break;
+
+                    case 8: OptionUdpateVehicule(vehiculeController); break;
+
+                    case 9: OptionAddLocation(locationController); break;
+
+                    case 10: Write(string.Join("\n", locationController.GetLocations())); break;
 
                     case 0: WriteLine("à bientôt..."); break;
 
@@ -50,7 +59,74 @@ namespace View
             }
         }
 
-        private static void OptionCreateLocation(LocationController locationController)
+        private static void OptionUdpateVehicule(VehiculeController vehiculeController)
+        {
+            int id = GetIntConsole("Tapez l'id du véhicule : ");
+            var vehicule = vehiculeController.GetVehiculeById(id);
+
+            if (vehicule == null) WriteLine("L'id n'existe pas en base");
+            else
+            {
+                String propModif = "";
+
+                while (propModif != "i" && propModif != "mod" && propModif != "cou" && propModif != "mar" && propModif
+                    != "czt" && propModif != "all")
+                {
+                    propModif = GetStringConsole("Choisissez l'élement à modifier " +
+                      "\ni : Immatriculation, mod : Modele, cou : Couleur, mar : Marque, cat : Categorie, " +
+                      "all : toute les éléments ");
+                }
+
+                switch (propModif)
+                {
+                    case "n": vehicule.Immatriculation = GetStringConsole(vehicule.Immatriculation + " : "); break;
+                    case "p": vehicule.Modele = GetStringConsole(vehicule.Modele + " : "); break;
+                    case "d": vehicule.Couleur = GetStringConsole(vehicule.Couleur + " : "); break;
+                    case "a": vehicule.MarqueID = GetIntConsole(vehicule.MarqueID + " : "); break;
+                    case "c": vehicule.CategorieID = GetIntConsole(vehicule.CategorieID + " : "); break;
+
+                    case "all":
+                        WriteLine(vehicule);
+                        vehicule = new Vehicule()
+                        {
+                            Id = vehicule.Id,
+                            Immatriculation = GetStringConsole("Immatriculation : "),
+                            Modele = GetStringConsole("Modele : "),
+                            Couleur = GetStringConsole("Couleur : "),
+                            MarqueID = GetIntConsole("Id Marque : "),
+                            CategorieID = GetIntConsole("Id Categorie : ")
+                        }; break;
+                    default: break;
+                }
+                vehiculeController.UpdateVehicule(vehicule);
+                WriteLine(vehiculeController.GetVehiculeById(id));
+            }
+        }
+
+        private static void OptionGetVehiculeById(VehiculeController vehiculeController)
+        {
+            int id = GetIntConsole("Tapez l'id du Vehicule : ");
+            var vehicule = vehiculeController.GetVehiculeById(id);
+
+            if (vehicule == null) WriteLine("L'id n'existe pas en base");
+            else WriteLine(vehicule);
+        }
+
+        private static void OptionAddVehicule(VehiculeController vehiculeController)
+        {
+            var vehicule = new Vehicule()
+            {
+                Immatriculation = GetStringConsole("Immatriculation : "),
+                Modele = GetStringConsole("Modele : "),
+                Couleur = GetStringConsole("Couleur : "),
+                MarqueID = GetIntConsole("Marque ID : "),
+                CategorieID = GetIntConsole("Catégorie Id : ")
+            };
+
+            WriteLine(vehiculeController.CreateVehicule(vehicule));
+        }
+
+        private static void OptionAddLocation(LocationController locationController)
         {
             var location = new Location()
             {
@@ -91,6 +167,7 @@ namespace View
                     case "c": client.CodePostal = GetStringConsole(client.CodePostal + " : "); break;
                     case "v": client.Ville = GetStringConsole(client.Ville + " : "); break;
                     case "all":
+                        WriteLine(client);
                         client = new Client()
                         {
                             Id = client.Id,

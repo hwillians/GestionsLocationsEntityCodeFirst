@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Models
@@ -25,6 +26,8 @@ namespace Models
 
         [MaxLength(50)]
         public string Ville { get; set; }
+
+        public virtual List<Location> Locations { get; set; }
 
         public override string ToString()
         {
